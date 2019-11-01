@@ -19,12 +19,16 @@ export default class Game {
   constructor(options: GameOptions) {
     this.fps = options.fps || 30
     this.images = {}
+
     this.scene = options.mainScene || new LoadingScene()
     this.scene.game = this
+    this.scene.init()
+
     this.canvas =
       options.canvas ||
       <HTMLCanvasElement>document.getElementById('main-canvas')
     this.ctx = this.canvas.getContext('2d')
+
     this.keydowns = {}
     this.actions = {}
     window.addEventListener('keydown', event => {
@@ -33,6 +37,7 @@ export default class Game {
     window.addEventListener('keyup', event => {
       this.keydowns[event.key] = false
     })
+
     this.init(options)
   }
   init(options: GameOptions) {
@@ -56,14 +61,14 @@ export default class Game {
     }
   }
 
-  // update
   update() {
     this.scene.update()
   }
+
   clear() {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height)
   }
-  // draw
+
   draw() {
     this.scene.draw()
   }
@@ -77,6 +82,8 @@ export default class Game {
     }, 1000 / this.fps)
   }
   replaceScene(scene: Scene) {
+    scene.game = this
+    scene.init()
     this.scene = scene
   }
 }

@@ -10,4 +10,5 @@ import MainScene from './main/scene'
     },
     mainScene
   })
+  console.log(game)
 })()
