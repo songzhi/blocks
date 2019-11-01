@@ -1,10 +1,15 @@
 import Game from './game'
+import { Uid } from './utils'
+import Scene from './scene'
 
 export default abstract class Drawable {
   game: Game
+  scene: Scene
   x: number
   y: number
+  uid: string
   constructor(x: number, y: number) {
+    this.uid = Uid()
     this.x = x
     this.y = y
   }

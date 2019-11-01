@@ -3,20 +3,24 @@ import Drawable from './drawable'
 
 export default abstract class Scene {
   game: Game
-  drawables: Drawable[] = []
+  drawables: { [key: string]: Drawable } = {}
   // 初始化资源,比如添加drawable
   abstract init(): void
   // 每更新一帧的时候被调用,但是这里应该写数据更新的操作
   abstract update(): void
   // 绘制一帧
   draw(): void {
-    for (let d of this.drawables) {
-      d.draw()
+    for (let uid of Object.keys(this.drawables)) {
+      this.drawables[uid].draw()
     }
   }
   addDrawable(drawable: Drawable): void {
     drawable.game = this.game
-    this.drawables.push(drawable)
+    drawable.scene = this
+    this.drawables[drawable.uid] = drawable
+  }
+  removeDrawable(uid: string): void {
+    delete this.drawables[uid]
   }
 }
 
