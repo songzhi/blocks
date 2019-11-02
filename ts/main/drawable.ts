@@ -1,6 +1,7 @@
 import { ImageDrawable } from '../base/drawable'
 
-export class Block extends ImageDrawable {}
+export class Block extends ImageDrawable {
+}
 
 export class Paddle extends ImageDrawable {}
 
