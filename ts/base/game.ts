@@ -15,14 +15,13 @@ export default class Game {
   canvas: HTMLCanvasElement
   keydowns: { [key: string]: boolean }
   actions: { [key: string]: () => {} }
-
+  mainScene: Scene
   constructor(options: GameOptions) {
     this.fps = options.fps || 30
     this.images = {}
 
-    this.scene = options.mainScene || new LoadingScene()
-    this.scene.game = this
-    this.scene.init()
+    this.replaceScene(new LoadingScene())
+    this.mainScene = options.mainScene || this.scene
 
     this.canvas =
       options.canvas ||
@@ -52,11 +51,13 @@ export default class Game {
             Object.keys(this.images).length ===
             Object.keys(options.images).length
           ) {
+            this.replaceScene(this.mainScene)
             this.runLoop()
           }
         }
       }
     } else {
+      this.replaceScene(this.mainScene)
       this.runLoop()
     }
   }

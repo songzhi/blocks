@@ -14,10 +14,13 @@ export default abstract class Scene {
       this.drawables[uid].draw()
     }
   }
-  addDrawable(drawable: Drawable): void {
+  addDrawable(drawable: Drawable, ...others: Drawable[]): void {
     drawable.game = this.game
     drawable.scene = this
     this.drawables[drawable.uid] = drawable
+    for (let d of others) {
+      this.drawables[d.uid] = d
+    }
   }
   removeDrawable(uid: string): void {
     delete this.drawables[uid]

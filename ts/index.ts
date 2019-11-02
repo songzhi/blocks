@@ -8,7 +8,8 @@ import MainScene from './main/scene'
       block: 'img/block.png',
       paddle: 'img/paddle.png'
     },
-    mainScene
+    mainScene,
+    fps: 60
   })
   console.log(game)
 })()
