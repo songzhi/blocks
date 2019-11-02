@@ -14,8 +14,9 @@ export default class Game {
   ctx: CanvasRenderingContext2D
   canvas: HTMLCanvasElement
   keydowns: { [key: string]: boolean }
-  actions: { [key: string]: () => {} }
+  actions: { [key: string]: () => void }
   mainScene: Scene
+  paused: boolean = false
   constructor(options: GameOptions) {
     this.fps = options.fps || 30
     this.images = {}
@@ -31,12 +32,15 @@ export default class Game {
     this.keydowns = {}
     this.actions = {}
     window.addEventListener('keydown', event => {
+      if (event.key === 'p') {
+        this.paused = !this.paused
+        return
+      }
       this.keydowns[event.key] = true
     })
     window.addEventListener('keyup', event => {
       this.keydowns[event.key] = false
     })
-
     this.init(options)
   }
   init(options: GameOptions) {
@@ -73,11 +77,21 @@ export default class Game {
   draw() {
     this.scene.draw()
   }
-
+  registerAction(key: string, action: () => void): void {
+    this.actions[key] = action
+  }
   runLoop() {
-    this.update()
-    this.clear()
-    this.draw()
+    if (!this.paused) {
+      for (let key of Object.keys(this.actions)) {
+        if (this.keydowns[key]) {
+          // 如果按键被按下, 调用注册的 action
+          this.actions[key]()
+        }
+      }
+      this.update()
+      this.clear()
+      this.draw()
+    }
     setTimeout(() => {
       this.runLoop()
     }, 1000 / this.fps)

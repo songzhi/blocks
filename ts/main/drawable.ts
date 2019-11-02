@@ -1,13 +1,26 @@
 import { ImageDrawable } from '../base/drawable'
 
-export class Block extends ImageDrawable {
+export class Block extends ImageDrawable {}
+
+export class Paddle extends ImageDrawable {
+  speed: number = 15
+  move(delta: number): void {
+    let x = this.x + delta
+    if (x < 0) x = 0
+    if (x > this.game.canvas.width - this.w) x = this.game.canvas.width - this.w
+    this.x = x
+  }
+  moveLeft(): void {
+    this.move(-this.speed)
+  }
+  moveRight(): void {
+    this.move(this.speed)
+  }
 }
 
-export class Paddle extends ImageDrawable {}
-
 export class Ball extends ImageDrawable {
-  speedX: number = 2
-  speedY: number = 2
+  speedX: number = 5
+  speedY: number = 5
   fired: boolean = false
   move() {
     if (this.fired) {
@@ -24,8 +37,5 @@ export class Ball extends ImageDrawable {
   }
   fire() {
     this.fired = true
-  }
-  bounce() {
-    this.speedY *= -1
   }
 }
