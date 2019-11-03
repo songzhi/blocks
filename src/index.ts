@@ -4,9 +4,9 @@ import MainScene from './main/scene'
   const mainScene = new MainScene()
   const game = new Game({
     images: {
-      ball: 'img/ball.png',
-      block: 'img/block.png',
-      paddle: 'img/paddle.png'
+      ball: 'ball.png',
+      block: 'block.png',
+      paddle: 'paddle.png'
     },
     mainScene,
     fps: 60

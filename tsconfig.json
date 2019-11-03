@@ -2,15 +2,15 @@
      "compilerOptions": {
          "target": "es5",
          "noImplicitAny": false,
-         "module": "amd",
+         "module": "commonjs",
          "removeComments": true,
          "sourceMap": false,
-         "outDir": "js"
+         "outDir": "docs"
      },
      "include": [
-         "ts"
+         "src"
      ],
      "exclude": [
-         "js"
+         "docs"
      ]
  }
