@@ -18,15 +18,13 @@ export default class Game {
   mainScene: Scene
   paused: boolean = false
   constructor(options: GameOptions) {
-    this.fps = options.fps || 30
+    this.fps = options.fps ?? 30
     this.images = {}
 
     this.replaceScene(new LoadingScene())
-    this.mainScene = options.mainScene || this.scene
+    this.mainScene = options.mainScene ?? this.scene
 
-    this.canvas =
-      options.canvas ||
-      <HTMLCanvasElement>document.getElementById('main-canvas')
+    this.canvas = options.canvas ?? <HTMLCanvasElement>document.getElementById('main-canvas')
     this.ctx = this.canvas.getContext('2d')
 
     this.keydowns = {}

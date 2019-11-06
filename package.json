@@ -18,7 +18,7 @@
   },
   "homepage": "https://github.com/songzhi/blocks#readme",
   "devDependencies": {
-    "typescript": "^3.6.4"
+    "typescript": "^3.7.2"
   },
   "staticFiles": {
     "staticPath": "src/assets",

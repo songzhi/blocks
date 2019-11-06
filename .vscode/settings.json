@@ -3,5 +3,6 @@
     "cSpell.words": [
         "drawables",
         "keydowns"
-    ]
+    ],
+    "typescript.tsdk": "node_modules\\typescript\\lib"
 }
